@@ -9,9 +9,9 @@ class MessageStoreClient():
   
   def __enter__(self):
     self._channel = grpc.insecure_channel(self.host)
-    self._send_command_req = self._channel.unary_unary('/EventStore/SendCommand', request_serializer=serializer, response_deserializer=deserializer)
-    self._emit_event_req = self._channel.unary_unary('/EventStore/EmitEvent', request_serializer=serializer, response_deserializer=deserializer)
-    self._subscribe_req = self._channel.unary_stream('/EventStore/Subscribe', request_serializer=serializer, response_deserializer=deserializer)
+    self._send_command_req = self._channel.unary_unary('/MessageStore/SendCommand', request_serializer=serializer, response_deserializer=deserializer)
+    self._emit_event_req = self._channel.unary_unary('/MessageStore/EmitEvent', request_serializer=serializer, response_deserializer=deserializer)
+    self._subscribe_req = self._channel.unary_stream('/MessageStore/Subscribe', request_serializer=serializer, response_deserializer=deserializer)
     return self
 
   def send_command(self, command, category, data = None, metadata = None, _id = None, expected_version = None):
